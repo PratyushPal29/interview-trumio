@@ -21,20 +21,20 @@ function App() {
   const [candidates, setCandidates] = useState([]);
 
   useEffect(() => {
-    const newCandidate = localStorage.getItem('candidate');
-    if (newCandidate) {
-      setCandidates(JSON.parse(newCandidate));
-    }
-  },[]) 
-
+    const newCandidates = localStorage.getItem('candidates');
+    if (newCandidates) {
+      setCandidates(JSON.parse(newCandidates));
+    } 
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem('candidate', JSON.stringify(candidates));
-  }, [candidates])
+    localStorage.setItem('candidates', JSON.stringify(candidates));
+  }, [candidates]);
 
   const addCandidate = (name) => {
+    console.log('Adding candidate:', name);
     setCandidates([...candidates, { name, votes: 0 }]);
-  }
+  };
 
   const voting = (name, vote) => {
     setCandidates(
@@ -46,13 +46,13 @@ function App() {
         )
         .sort((a, b) => b.votes - a.votes)
     );
-  }
+  };
 
   return (
-    <div className='App'>
+    <div className="App">
       <h2>Voting of Candidate</h2>
       <CandidateForm addCandidate={addCandidate} />
-      <CandidateList candidate={candidates} voting={voting} />
+      <CandidateList candidates={candidates} voting={voting} />
     </div>
   );
 }

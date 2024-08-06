@@ -11,7 +11,6 @@ const CandidateList = ({ candidates, voting }) => {
                     votes={candidate.votes}
                     voting={voting}
                 />
-
             ))}
         </div>
     )
