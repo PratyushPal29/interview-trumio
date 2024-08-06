@@ -25,7 +25,8 @@ function App() {
     if (newCandidate) {
       setCandidates(newCandidate);
     }
-  })
+  }) 
+  
 
   useEffect(() => {
     localStorage.setItem('candidate', JSON.stringify(candidates));
