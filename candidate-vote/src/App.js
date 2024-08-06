@@ -23,10 +23,10 @@ function App() {
   useEffect(() => {
     const newCandidate = localStorage.getItem('candidate');
     if (newCandidate) {
-      setCandidates(newCandidate);
+      setCandidates(JSON.parse(newCandidate));
     }
-  }) 
-  
+  },[]) 
+
 
   useEffect(() => {
     localStorage.setItem('candidate', JSON.stringify(candidates));
@@ -38,13 +38,14 @@ function App() {
 
   const voting = (name, vote) => {
     setCandidates(
-      candidates.map((candidate) => {
-        return (
-
-          (candidate.name === name) ? { ...candidate, votes: candidate.votes + vote } : candidate
+      candidates
+        .map((candidate) =>
+          candidate.name === name
+            ? { ...candidate, votes: candidate.votes + vote }
+            : candidate
         )
-      }).sort((a, b) => b.votes - a.votes)
-    )
+        .sort((a, b) => b.votes - a.votes)
+    );
   }
 
   return (
